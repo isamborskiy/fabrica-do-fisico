@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fábrica do Físico – Ginásio em Lisboa</title>
+  <meta name="description" content="Ginásio Fábrica do Físico em Lisboa. Musculação, Kick Boxing, Cardiofitness, Indoor Cycling, Yoga e mais." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --card: #181818;
+      --border: #2a2a2a;
+      --red: #e8332a;
+      --red-dark: #b5261f;
+      --red-glow: rgba(232, 51, 42, 0.18);
+      --white: #ffffff;
+      --grey: #9a9a9a;
+      --light: #f5f5f5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    /* ── LANG TOGGLE ── */
+    #lang-toggle {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      z-index: 1000;
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--dark);
+    }
+    #lang-toggle button {
+      background: none;
+      border: none;
+      color: var(--grey);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    #lang-toggle button.active { background: var(--red); color: var(--white); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      padding: 0 5vw;
+      display: flex;
+      align-items: center;
+      height: 72px;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0.0) 100%);
+      transition: background 0.3s;
+    }
+    nav.scrolled { background: rgba(10,10,10,0.97); border-bottom: 1px solid var(--border); }
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo-svg {
+      width: 28px;
+      height: 32px;
+      flex-shrink: 0;
+      mix-blend-mode: screen;
+      filter: invert(1);
+    }
+    /* Hero decorative logo */
+    .hero-logo-deco {
+      position: absolute;
+      right: 4vw;
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(340px, 38vw);
+      height: auto;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.18;
+      mix-blend-mode: screen;
+      filter: invert(1);
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      margin-right: 96px;
+    }
+    .nav-links a {
+      color: var(--grey);
+      text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      margin-right: 96px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white); transition: 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: rgba(10,10,10,0.98);
+      padding: 24px 5vw;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 899;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--grey);
+      text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 5vw 80px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: 
+        radial-gradient(ellipse 60% 80% at 70% 50%, rgba(232,51,42,0.12) 0%, transparent 65%),
+        linear-gradient(135deg, #0a0a0a 0%, #111 60%, #0f0e0e 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 780px;
+    }
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      line-height: 0.92;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+    .hero-title .outline {
+      -webkit-text-stroke: 2px var(--white);
+      color: transparent;
+    }
+    .hero-title .red { color: var(--red); }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--grey);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-top: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+    .hero-cta {
+      margin-top: 40px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+    .btn-primary {
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      padding: 14px 32px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--border);
+      padding: 14px 32px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
+    .hero-stats {
+      display: flex; gap: 40px;
+      margin-top: 48px;
+      opacity: 0; animation: fadeUp 0.8s 1s forwards;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 2.8rem;
+      color: var(--red);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--grey);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 4px;
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 5vw; }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .section-title .dim { color: var(--grey); }
+    .section-sub {
+      color: var(--grey);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 56px;
+    }
+
+    /* ── CLASSES ── */
+    #classes { background: var(--dark); }
+    .classes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2px;
+    }
+    .class-card {
+      position: relative;
+      background: var(--card);
+      padding: 40px 32px;
+      overflow: hidden;
+      cursor: default;
+      transition: transform 0.3s;
+    }
+    .class-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--red);
+      transition: height 0.35s ease;
+    }
+    .class-card:hover::before { height: 100%; }
+    .class-card:hover { transform: translateY(-4px); }
+    .class-icon {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .class-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+    .class-desc { color: var(--grey); font-size: 0.92rem; line-height: 1.65; }
+
+    /* ── SCHEDULE ── */
+    #schedule {}
+    .schedule-intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .schedule-table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 560px;
+    }
+    thead th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--grey);
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    tbody td {
+      padding: 16px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+      color: var(--light);
+    }
+    tbody tr:hover td { background: var(--card); }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+    .badge-red { background: var(--red-glow); color: var(--red); }
+    .badge-white { background: rgba(255,255,255,0.08); color: var(--white); }
+
+    /* ── PRICING ── */
+    #pricing { background: var(--dark); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2px;
+    }
+    .price-card {
+      background: var(--card);
+      padding: 48px 36px;
+      position: relative;
+      transition: transform 0.3s;
+    }
+    .price-card.featured {
+      background: var(--red);
+      transform: translateY(-8px);
+    }
+    .price-card:hover:not(.featured) { transform: translateY(-4px); }
+    .price-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 300;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 12px;
+    }
+    .price-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+    }
+    .price-amount {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 3.5rem;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .price-amount sup { font-size: 1.4rem; vertical-align: super; }
+    .price-period { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+    .price-features { list-style: none; margin-bottom: 36px; }
+    .price-features li {
+      font-size: 0.92rem;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.8);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .price-features li::before { content: '✓'; font-weight: 700; color: inherit; flex-shrink: 0; }
+    .price-card.featured .price-features li::before { color: var(--white); }
+
+    /* ── ABOUT ── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+      aspect-ratio: 4/5;
+      background: var(--card);
+      overflow: hidden;
+    }
+    .about-visual-inner {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--card) 0%, #1a1a1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 8rem;
+      color: rgba(255,255,255,0.04);
+      text-transform: uppercase;
+      letter-spacing: -0.05em;
+      line-height: 1;
+    }
+    .about-accent {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--red);
+    }
+    .about-quote {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      line-height: 1.3;
+      margin-bottom: 24px;
+      color: var(--white);
+    }
+    .about-text { color: var(--grey); line-height: 1.8; margin-bottom: 16px; font-size: 0.97rem; }
+    .about-info {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .about-info-row {
+      display: flex; gap: 14px; align-items: center;
+      font-size: 0.9rem; color: var(--grey);
+    }
+    .about-info-row span:first-child { color: var(--red); font-size: 1rem; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--dark); }
+    .contact-items-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px 48px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 600px) {
+      .contact-items-grid { grid-template-columns: 1fr; }
+    }
+    .contact-item {
+      display: flex; gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .contact-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: var(--red-glow);
+      border: 1px solid var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .contact-info-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 4px;
+    }
+    .contact-info-value { font-size: 0.97rem; color: var(--white); }
+
+    /* ── MAP ── */
+    .map-wrap {
+      width: 100%;
+      height: 340px;
+      background: var(--card);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .map-wrap iframe { width: 100%; height: 100%; border: none; filter: grayscale(1) invert(0.9) contrast(0.9); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      padding: 48px 5vw 28px;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .footer-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .footer-logo span { color: var(--red); }
+    .footer-tagline { color: var(--grey); font-size: 0.85rem; margin-top: 6px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      color: var(--grey); text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600; font-size: 0.85rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy { color: var(--grey); font-size: 0.8rem; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-logo-deco { display: none; }
+      #about { grid-template-columns: 1fr; }
+      .about-visual { display: none; }
+    }
+    @media (max-width: 600px) {
+      .hero-cta { flex-direction: column; }
+      .hero-cta a, .hero-cta button { width: 100%; text-align: center; }
+      .stat-num { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LANG TOGGLE -->
+<div id="lang-toggle">
+  <button id="btn-pt" class="active" onclick="setLang('pt')">PT</button>
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img class="nav-logo-svg" src="data:image/webp;base64,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" alt="Fábrica do Físico logo" />
+    Fábrica <span>do</span> Físico
+  </a>
+  <ul class="nav-links">
+    <li><a href="#classes" data-i18n="nav-classes">Aulas</a></li>
+    <li><a href="#pricing" data-i18n="nav-pricing">Preçário</a></li>
+    <li><a href="#about" data-i18n="nav-about">Sobre Nós</a></li>
+    <li><a href="#contact" data-i18n="nav-contact">Contactos</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#classes" data-i18n="nav-classes" onclick="closeMobile()">Aulas</a>
+  <a href="#pricing" data-i18n="nav-pricing" onclick="closeMobile()">Preçário</a>
+  <a href="#about" data-i18n="nav-about" onclick="closeMobile()">Sobre Nós</a>
+  <a href="#contact" data-i18n="nav-contact" onclick="closeMobile()">Contactos</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <!-- Decorative large logo -->
+  <img class="hero-logo-deco" src="data:image/webp;base64,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" alt="" aria-hidden="true" />
+  <div class="hero-content">
+    <p class="hero-eyebrow" data-i18n="hero-eyebrow">Lisboa · Av. Gen. Roçadas 9</p>
+    <h1 class="hero-title">
+      <span class="outline" data-i18n="hero-title-1">Fábrica</span><br>
+      <span class="red" data-i18n="hero-title-2">do Físico</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero-sub">
+      Melhor qualidade de vida começa aqui. O ginásio que te apoia para te sentires bem, física e emocionalmente.
+    </p>
+    <div class="hero-cta">
+      <a href="#pricing" class="btn-primary" data-i18n="hero-cta1">Ver Planos</a>
+      <a href="#contact" class="btn-outline" data-i18n="hero-cta2">Contactar</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">10+</div>
+        <div class="stat-label" data-i18n="stat-years">Anos de Experiência</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">∞</div>
+        <div class="stat-label" data-i18n="stat-motivation">Motivação</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLASSES -->
+<section id="classes">
+  <div class="reveal">
+    <p class="section-label" data-i18n="classes-label">O Que Oferecemos</p>
+    <h2 class="section-title">
+      <span data-i18n="classes-title-1">Modalidades</span><br>
+      <span class="dim" data-i18n="classes-title-2">& Atividades</span>
+    </h2>
+    <p class="section-sub" data-i18n="classes-sub">Descubra as nossas modalidades para todos os níveis e objetivos.</p>
+  </div>
+  <div class="classes-grid">
+    <div class="class-card reveal">
+      <span class="class-icon">🏋️</span>
+      <h3 class="class-name" data-i18n="class1-name">Musculação</h3>
+      <p class="class-desc" data-i18n="class1-desc">Sala equipada com as mais modernas máquinas e pesos livres. Treino personalizado com acompanhamento profissional.</p>
+    </div>
+    <div class="class-card reveal">
+      <span class="class-icon">❤️</span>
+      <h3 class="class-name" data-i18n="class4-name">Cardiofitness</h3>
+      <p class="class-desc" data-i18n="class4-desc">Exercícios aeróbicos em grupo com foco na saúde cardiovascular, queima de gordura e bem-estar geral.</p>
+    </div>
+    <div class="class-card reveal">
+      <span class="class-icon">👤</span>
+      <h3 class="class-name" data-i18n="class8-name">Personal Training</h3>
+      <p class="class-desc" data-i18n="class8-desc">Acompanhamento personalizado com plano de treino adaptado aos seus objetivos e condição física.</p>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="reveal">
+    <p class="section-label" data-i18n="pricing-label">Invista em Si</p>
+    <h2 class="section-title">
+      <span data-i18n="pricing-title-1">Mensalidade</span>
+      <span class="dim" data-i18n="pricing-title-2"> & Preçário</span>
+    </h2>
+    <p class="section-sub" data-i18n="pricing-sub">Acesso completo ao ginásio — escolha a duração que melhor se encaixa no seu ritmo.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card reveal">
+      <p class="price-tag" data-i18n="plan0-tag">Entrada Única</p>
+      <h3 class="price-name" data-i18n="plan0-name">Passe de Dia</h3>
+      <div class="price-amount"><sup>€</sup>XX</div>
+      <p class="price-period" data-i18n="plan0-period">por visita</p>
+      <a href="#contact" class="btn-outline" style="width:100%;text-align:center;margin-top:auto;" data-i18n="plan-cta">Começar Agora</a>
+    </div>
+    <div class="price-card reveal">
+      <p class="price-tag" data-i18n="plan1-tag">Flexibilidade Total</p>
+      <h3 class="price-name" data-i18n="plan1-name">1 Mês</h3>
+      <div class="price-amount"><sup>€</sup>XX</div>
+      <p class="price-period" data-i18n="plan1-period">por mês</p>
+      <a href="#contact" class="btn-outline" style="width:100%;text-align:center;margin-top:auto;" data-i18n="plan-cta">Começar Agora</a>
+    </div>
+    <div class="price-card featured reveal">
+      <p class="price-tag" data-i18n="plan2-tag">Mais Escolhido</p>
+      <h3 class="price-name" data-i18n="plan2-name">3 Meses</h3>
+      <div class="price-amount"><sup>€</sup>XX</div>
+      <p class="price-period" data-i18n="plan2-period">por trimestre</p>
+      <a href="#contact" class="btn-primary" style="background:white;color:#0a0a0a;width:100%;text-align:center;margin-top:auto;" data-i18n="plan-cta">Começar Agora</a>
+    </div>
+    <div class="price-card reveal">
+      <p class="price-tag" data-i18n="plan3-tag">Melhor Valor</p>
+      <h3 class="price-name" data-i18n="plan3-name">1 Ano</h3>
+      <div class="price-amount"><sup>€</sup>XX</div>
+      <p class="price-period" data-i18n="plan3-period">por ano</p>
+      <a href="#contact" class="btn-outline" style="width:100%;text-align:center;margin-top:auto;" data-i18n="plan-cta">Começar Agora</a>
+    </div>
+  </div>
+  <p class="reveal" style="margin-top:32px;color:var(--grey);font-size:0.88rem;" data-i18n="pricing-note">Todos os planos incluem acesso total ao ginásio e acompanhamento profissional.</p>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-visual-inner">FF</div>
+    <div class="about-accent"></div>
+  </div>
+  <div class="reveal">
+    <p class="section-label" data-i18n="about-label">A Nossa História</p>
+    <h2 class="section-title" data-i18n="about-title">Sobre Nós</h2>
+    <blockquote class="about-quote" data-i18n="about-quote">
+      "Be healthy with us."
+    </blockquote>
+    <p class="about-text" data-i18n="about-p1">
+      A Fábrica do Físico nasceu com uma visão clara: proporcionar uma melhor qualidade de vida às pessoas que nos escolhem. A nossa missão é ajudar cada sócio a sentir-se bem, tanto física como emocionalmente.
+    </p>
+    <p class="about-text" data-i18n="about-p2">
+      Situado na Av. Gen. Roçadas 9, em Lisboa, o nosso ginásio oferece instalações modernas, equipamentos de última geração e uma equipa de profissionais dedicados ao seu progresso.
+    </p>
+    <div class="about-info">
+      <div class="about-info-row">
+        <span>📍</span>
+        <span data-i18n="about-addr">Av. Gen. Roçadas 9, 1170-037 Lisboa</span>
+      </div>
+      <div class="about-info-row">
+        <span>📞</span>
+        <span>+351 961 781 609</span>
+      </div>
+      <div class="about-info-row">
+        <span>✉️</span>
+        <span>ginasio.fabrica.do.fisico@gmail.com</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <p class="section-label" data-i18n="contact-label">Fale Connosco</p>
+    <h2 class="section-title" data-i18n="contact-title">Contactos</h2>
+  </div>
+  <div class="reveal">
+      <div class="contact-items-grid">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <p class="contact-info-label" data-i18n="contact-addr-label">Morada</p>
+            <p class="contact-info-value" data-i18n="about-addr">Av. Gen. Roçadas 9, 1170-037 Lisboa</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <p class="contact-info-label" data-i18n="contact-phone-label">Telefone</p>
+            <p class="contact-info-value">+351 961 781 609</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <p class="contact-info-label">Email</p>
+            <p class="contact-info-value">ginasio.fabrica.do.fisico@gmail.com</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <p class="contact-info-label" data-i18n="contact-hours-label">Horário</p>
+            <p class="contact-info-value" data-i18n="contact-hours-val">Seg–Sex: 07:00–22:00 | Sáb: 09:00–14:00</p>
+          </div>
+        </div>
+      </div>
+      <div class="map-wrap">
+        <iframe
+          src="https://maps.google.com/maps?q=Av.+Gen.+Ro%C3%A7adas+9,+1170-037+Lisboa&output=embed"
+          allowfullscreen loading="lazy">
+        </iframe>
+      </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Fábrica <span>do</span> Físico</div>
+      <p class="footer-tagline" data-i18n="footer-tag">Be healthy with us.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#classes" data-i18n="nav-classes">Aulas</a></li>
+      <li><a href="#pricing" data-i18n="nav-pricing">Preçário</a></li>
+      <li><a href="#about" data-i18n="nav-about">Sobre Nós</a></li>
+      <li><a href="#contact" data-i18n="nav-contact">Contactos</a></li>
+    </ul>
+    <div>
+      <p class="contact-info-label" style="margin-bottom:8px" data-i18n="contact-addr-label">Morada</p>
+      <p style="color:var(--grey);font-size:0.88rem;line-height:1.6" data-i18n="about-addr">Av. Gen. Roçadas 9, 1170-037 Lisboa</p>
+      <p style="color:var(--grey);font-size:0.88rem;margin-top:8px;">+351 961 781 609</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy" data-i18n="footer-copy">© 2025 Fábrica do Físico. Todos os direitos reservados.</span>
+    <span class="footer-copy">ginasio.fabrica.do.fisico@gmail.com</span>
+  </div>
+</footer>
+
+<script>
+  // ── I18N ──
+  const translations = {
+    pt: {
+      "nav-classes": "Aulas",
+      "nav-schedule": "Horários",
+      "nav-pricing": "Preçário",
+      "nav-about": "Sobre Nós",
+      "nav-contact": "Contactos",
+      "hero-eyebrow": "Lisboa · Av. Gen. Roçadas 9",
+      "hero-title-1": "Fábrica",
+      "hero-title-2": "do Físico",
+      "hero-sub": "Melhor qualidade de vida começa aqui. O ginásio que te apoia para te sentires bem, física e emocionalmente.",
+      "hero-cta1": "Ver Planos",
+      "hero-cta2": "Contactar",
+      "stat-classes": "Modalidades",
+      "stat-years": "Anos de Experiência",
+      "stat-motivation": "Motivação",
+      "classes-label": "O Que Oferecemos",
+      "classes-title-1": "Modalidades",
+      "classes-title-2": "& Atividades",
+      "classes-sub": "Descubra as nossas modalidades para todos os níveis e objetivos.",
+      "class1-name": "Musculação", "class1-desc": "Sala equipada com as mais modernas máquinas e pesos livres. Treino personalizado com acompanhamento profissional.",
+      "class2-name": "Kick Boxing", "class2-desc": "Aulas dinâmicas que combinam artes marciais com treino cardiorrespiratório de alta intensidade.",
+      "class3-name": "Indoor Cycling", "class3-desc": "Pedala ao ritmo da música numa experiência imersiva que queima calorias e melhora a resistência cardíaca.",
+      "class4-name": "Cardiofitness", "class4-desc": "Exercícios aeróbicos em grupo com foco na saúde cardiovascular, queima de gordura e bem-estar geral.",
+      "class5-name": "Yoga", "class5-desc": "Equilíbrio entre corpo e mente. Aulas para todos os níveis, do iniciante ao avançado.",
+      "class6-name": "GAP", "class6-desc": "Treino específico focado em Glúteos, Abdominais e Pernas — tonificação e força no core.",
+      "class7-name": "Aulas de Grupo", "class7-desc": "Variedade de aulas coletivas num ambiente motivador, ideal para quem gosta de treinar acompanhado.",
+      "class8-name": "Personal Training", "class8-desc": "Acompanhamento personalizado com plano de treino adaptado aos seus objetivos e condição física.",
+      "schedule-label": "Planeie o Seu Treino",
+      "schedule-title": "Horários",
+      "schedule-sub": "Confira os horários das nossas aulas e escolha o que melhor se adapta ao seu dia.",
+      "th-class": "Aula", "th-mon": "Segunda", "th-tue": "Terça", "th-wed": "Quarta", "th-thu": "Quinta", "th-fri": "Sexta", "th-sat": "Sábado",
+      "pricing-label": "Invista em Si",
+      "pricing-title-1": "Mensalidade",
+      "pricing-title-2": " & Preçário",
+      "pricing-sub": "Acesso completo ao ginásio — escolha a duração que melhor se encaixa no seu ritmo.",
+      "plan0-tag": "Entrada Única", "plan0-name": "Passe de Dia", "plan0-period": "por visita",
+      "plan1-tag": "Flexibilidade Total", "plan1-name": "1 Mês", "plan1-period": "por mês",
+      "plan2-tag": "Mais Escolhido", "plan2-name": "3 Meses", "plan2-period": "por trimestre",
+      "plan3-tag": "Melhor Valor", "plan3-name": "1 Ano", "plan3-period": "por ano",
+      "plan-cta": "Começar Agora",
+      "pricing-note": "Todos os planos incluem acesso total ao ginásio e acompanhamento profissional.",
+      "about-label": "A Nossa História",
+      "about-title": "Sobre Nós",
+      "about-quote": "\"Be healthy with us.\"",
+      "about-p1": "A Fábrica do Físico nasceu com uma visão clara: proporcionar uma melhor qualidade de vida às pessoas que nos escolhem. A nossa missão é ajudar cada sócio a sentir-se bem, tanto física como emocionalmente.",
+      "about-p2": "Situado na Av. Gen. Roçadas 9, em Lisboa, o nosso ginásio oferece instalações modernas, equipamentos de última geração e uma equipa de profissionais dedicados ao seu progresso.",
+      "about-addr": "Av. Gen. Roçadas 9, 1170-037 Lisboa",
+      "contact-label": "Fale Connosco",
+      "contact-title": "Contactos",
+      "contact-addr-label": "Morada",
+      "contact-phone-label": "Telefone",
+      "contact-hours-label": "Horário",
+      "contact-hours-val": "Seg–Sex: 07:00–22:00 | Sáb: 09:00–14:00",
+      "form-name": "Nome", "form-email": "Email", "form-phone": "Telefone (opcional)",
+      "form-subject": "Assunto",
+      "opt1": "Informações sobre planos", "opt2": "Marcação de visita", "opt3": "Personal Training", "opt4": "Outro",
+      "form-message": "Mensagem",
+      "form-submit": "Enviar Mensagem",
+      "form-ok": "✓ Mensagem enviada! Entraremos em contacto em breve.",
+      "footer-tag": "Be healthy with us.",
+      "footer-copy": "© 2025 Fábrica do Físico. Todos os direitos reservados."
+    },
+    en: {
+      "nav-classes": "Classes",
+      "nav-schedule": "Schedule",
+      "nav-pricing": "Pricing",
+      "nav-about": "About",
+      "nav-contact": "Contact",
+      "hero-eyebrow": "Lisbon · Av. Gen. Roçadas 9",
+      "hero-title-1": "Fábrica",
+      "hero-title-2": "do Físico",
+      "hero-sub": "A better quality of life starts here. The gym that supports you to feel good, physically and emotionally.",
+      "hero-cta1": "View Plans",
+      "hero-cta2": "Contact Us",
+      "stat-classes": "Disciplines",
+      "stat-years": "Years of Experience",
+      "stat-motivation": "Motivation",
+      "classes-label": "What We Offer",
+      "classes-title-1": "Classes",
+      "classes-title-2": "& Activities",
+      "classes-sub": "Discover our disciplines for all levels and goals.",
+      "class1-name": "Weight Training", "class1-desc": "Fully equipped gym with modern machines and free weights. Personalised training with professional support.",
+      "class2-name": "Kick Boxing", "class2-desc": "Dynamic classes combining martial arts with high-intensity cardio training.",
+      "class3-name": "Indoor Cycling", "class3-desc": "Pedal to the music in an immersive experience that burns calories and improves cardiovascular endurance.",
+      "class4-name": "Cardio Fitness", "class4-desc": "Group aerobic exercises focused on cardiovascular health, fat burning and overall wellbeing.",
+      "class5-name": "Yoga", "class5-desc": "Balance between body and mind. Classes for all levels, from beginner to advanced.",
+      "class6-name": "GAP", "class6-desc": "Targeted workout focusing on Glutes, Abs and Legs — toning and core strength.",
+      "class7-name": "Group Classes", "class7-desc": "A variety of group classes in a motivating environment, ideal for those who love training together.",
+      "class8-name": "Personal Training", "class8-desc": "One-on-one coaching with a personalised training plan tailored to your goals and fitness level.",
+      "schedule-label": "Plan Your Workout",
+      "schedule-title": "Schedule",
+      "schedule-sub": "Check our class timetables and choose what best fits your day.",
+      "th-class": "Class", "th-mon": "Monday", "th-tue": "Tuesday", "th-wed": "Wednesday", "th-thu": "Thursday", "th-fri": "Friday", "th-sat": "Saturday",
+      "pricing-label": "Invest in Yourself",
+      "pricing-title-1": "Membership",
+      "pricing-title-2": " & Pricing",
+      "pricing-sub": "Full gym access — choose the duration that best fits your lifestyle.",
+      "plan0-tag": "Single Entry", "plan0-name": "Day Pass", "plan0-period": "per visit",
+      "plan1-tag": "Full Flexibility", "plan1-name": "1 Month", "plan1-period": "per month",
+      "plan2-tag": "Most Popular", "plan2-name": "3 Months", "plan2-period": "per quarter",
+      "plan3-tag": "Best Value", "plan3-name": "1 Year", "plan3-period": "per year",
+      "plan-cta": "Get Started",
+      "pricing-note": "All memberships include full gym access and professional coaching.",
+      "about-label": "Our Story",
+      "about-title": "About Us",
+      "about-quote": "\"Be healthy with us.\"",
+      "about-p1": "Fábrica do Físico was born with a clear vision: to provide a better quality of life to the people who choose us. Our mission is to help every member feel well, both physically and emotionally.",
+      "about-p2": "Located on Av. Gen. Roçadas 9 in Lisbon, our gym offers modern facilities, cutting-edge equipment and a team of dedicated professionals committed to your progress.",
+      "about-addr": "Av. Gen. Roçadas 9, 1170-037 Lisboa",
+      "contact-label": "Get in Touch",
+      "contact-title": "Contact",
+      "contact-addr-label": "Address",
+      "contact-phone-label": "Phone",
+      "contact-hours-label": "Opening Hours",
+      "contact-hours-val": "Mon–Fri: 07:00–22:00 | Sat: 09:00–14:00",
+      "form-name": "Name", "form-email": "Email", "form-phone": "Phone (optional)",
+      "form-subject": "Subject",
+      "opt1": "Plan information", "opt2": "Schedule a visit", "opt3": "Personal Training", "opt4": "Other",
+      "form-message": "Message",
+      "form-submit": "Send Message",
+      "form-ok": "✓ Message sent! We will get back to you soon.",
+      "footer-tag": "Be healthy with us.",
+      "footer-copy": "© 2025 Fábrica do Físico. All rights reserved."
+    }
+  };
+
+  let currentLang = 'pt';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang === 'pt' ? 'pt' : 'en';
+    document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    const t = translations[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+    document.querySelectorAll('[data-placeholder-i18n]').forEach(el => {
+      const key = el.getAttribute('data-placeholder-i18n');
+      if (t[key] !== undefined) el.placeholder = t[key];
+    });
+  }
+
+  // ── NAV SCROLL ──
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ── HAMBURGER ──
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+  function closeMobile() {
+    document.getElementById('mobile-menu').classList.remove('open');
+  }
+
+  // ── REVEAL ON SCROLL ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+</script>
+</body>
+</html>
