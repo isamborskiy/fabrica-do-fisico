@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt" translate="no">
 <head>
   <meta charset="UTF-8" />
+  <meta name="google" content="notranslate" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fábrica do Físico – Ginásio em Lisboa</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -61,12 +62,11 @@
       "@type": "OfferCatalog",
       "name": "Memberships",
       "itemListElement": [
-        {
-          "@type": "Offer",
-          "name": "1 Month Membership",
-          "price": "32",
-          "priceCurrency": "EUR"
-        }
+        { "@type": "Offer", "name": "Day Pass", "price": "8", "priceCurrency": "EUR" },
+        { "@type": "Offer", "name": "1 Month Membership", "price": "32", "priceCurrency": "EUR" },
+        { "@type": "Offer", "name": "3 Month Membership", "price": "90", "priceCurrency": "EUR" },
+        { "@type": "Offer", "name": "6 Month Membership", "price": "160", "priceCurrency": "EUR" },
+        { "@type": "Offer", "name": "1 Year Membership", "price": "300", "priceCurrency": "EUR" }
       ]
     },
     "availableLanguage": ["Portuguese", "English"],
@@ -464,6 +464,8 @@
       padding: 48px 36px;
       position: relative;
       transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
     }
     .price-card.featured {
       background: var(--red);
@@ -495,7 +497,32 @@
       margin-bottom: 4px;
     }
     .price-amount sup { font-size: 1.4rem; vertical-align: super; }
-    .price-period { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+    .price-period { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 8px; }
+    .price-insurance { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-bottom: 28px; }
+    .pricing-extras {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .extra-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      max-width: 320px;
+    }
+    .extra-name { font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+    .extra-price { font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.7); white-space: nowrap; }
+    .pricing-cash-note {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.5);
+    }
+    .pricing-cash-note strong { color: rgba(255,255,255,0.75); font-weight: 600; }
     .price-features { list-style: none; margin-bottom: 36px; }
     .price-features li {
       font-size: 0.92rem;
@@ -778,36 +805,54 @@
   </div>
   <div class="pricing-grid">
     <div class="price-card reveal">
-      <p class="price-tag" data-i18n="plan0-tag">Entrada Única</p>
-      <h3 class="price-name" data-i18n="plan0-name">Passe de Dia</h3>
-      <div class="price-amount"><sup>€</sup>XX</div>
-      <p class="price-period" data-i18n="plan0-period">por visita</p>
-      <a href="#contact" class="btn-outline" style="width:100%;text-align:center;margin-top:auto;" data-i18n="plan-cta">Começar Agora</a>
-    </div>
-    <div class="price-card reveal">
       <p class="price-tag" data-i18n="plan1-tag">Flexibilidade Total</p>
       <h3 class="price-name" data-i18n="plan1-name">1 Mês</h3>
       <div class="price-amount"><sup>€</sup>32</div>
       <p class="price-period" data-i18n="plan1-period">por mês</p>
-      <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:-24px;margin-bottom:28px;" data-i18n="plan1-note">€37 a partir do dia 1 (inclusive)</p>
+      <p class="price-insurance" data-i18n="plan1-note">€37 a partir do dia 1 (inclusive)</p>
       <a href="#contact" class="btn-outline" style="width:100%;text-align:center;margin-top:auto;" data-i18n="plan-cta">Começar Agora</a>
     </div>
     <div class="price-card featured reveal">
       <p class="price-tag" data-i18n="plan2-tag">Mais Escolhido</p>
       <h3 class="price-name" data-i18n="plan2-name">3 Meses</h3>
-      <div class="price-amount"><sup>€</sup>XX</div>
+      <div class="price-amount"><sup>€</sup>90</div>
       <p class="price-period" data-i18n="plan2-period">por trimestre</p>
       <a href="#contact" class="btn-primary" style="background:white;color:#0a0a0a;width:100%;text-align:center;margin-top:auto;" data-i18n="plan-cta">Começar Agora</a>
     </div>
     <div class="price-card reveal">
-      <p class="price-tag" data-i18n="plan3-tag">Melhor Valor</p>
-      <h3 class="price-name" data-i18n="plan3-name">1 Ano</h3>
-      <div class="price-amount"><sup>€</sup>XX</div>
-      <p class="price-period" data-i18n="plan3-period">por ano</p>
+      <p class="price-tag" data-i18n="plan3-tag">Poupança Crescente</p>
+      <h3 class="price-name" data-i18n="plan3-name">6 Meses</h3>
+      <div class="price-amount"><sup>€</sup>160</div>
+      <p class="price-period" data-i18n="plan3-period">por semestre</p>
+      <a href="#contact" class="btn-outline" style="width:100%;text-align:center;margin-top:auto;" data-i18n="plan-cta">Começar Agora</a>
+    </div>
+    <div class="price-card reveal">
+      <p class="price-tag" data-i18n="plan4-tag">Melhor Valor</p>
+      <h3 class="price-name" data-i18n="plan4-name">1 Ano</h3>
+      <div class="price-amount"><sup>€</sup>300</div>
+      <p class="price-period" data-i18n="plan4-period">por ano</p>
       <a href="#contact" class="btn-outline" style="width:100%;text-align:center;margin-top:auto;" data-i18n="plan-cta">Começar Agora</a>
     </div>
   </div>
-  <p class="reveal" style="margin-top:32px;color:var(--grey);font-size:0.88rem;" data-i18n="pricing-note">Todos os planos incluem acesso total ao ginásio e acompanhamento profissional.</p>
+  <div class="pricing-extras reveal">
+    <div class="extra-item">
+      <span class="extra-name" data-i18n="extra0-name">Passe de Dia</span>
+      <span class="extra-price">€8 <span data-i18n="extra-per-visit">/ visita</span></span>
+    </div>
+    <div class="extra-item">
+      <span class="extra-name" data-i18n="extra1-name">Cacifo (mensal)</span>
+      <span class="extra-price">€5 <span data-i18n="extra-per-month">/ mês</span></span>
+    </div>
+    <div class="extra-item">
+      <span class="extra-name" data-i18n="extra2-name">Toalha</span>
+      <span class="extra-price">€3 <span data-i18n="extra-per-visit">/ visita</span></span>
+    </div>
+  </div>
+  <div class="pricing-cash-note reveal">
+    <span>💵</span>
+    <span data-i18n="pricing-cash"><strong data-i18n="pricing-cash-bold">Pagamento apenas em dinheiro</strong> — não aceitamos cartões nem MBWay.</span>
+  </div>
+  <p class="reveal" style="margin-top:16px;color:var(--grey);font-size:0.88rem;" data-i18n="pricing-note">Todos os planos mensais incluem seguro anual de €15 (cobrado proporcionalmente).</p>
 </section>
 
 <!-- ABOUT -->
@@ -957,9 +1002,14 @@
       "plan0-tag": "Entrada Única", "plan0-name": "Passe de Dia", "plan0-period": "por visita",
       "plan1-tag": "Flexibilidade Total", "plan1-name": "1 Mês", "plan1-period": "por mês", "plan1-note": "€37 a partir do dia 1 (inclusive)",
       "plan2-tag": "Mais Escolhido", "plan2-name": "3 Meses", "plan2-period": "por trimestre",
-      "plan3-tag": "Melhor Valor", "plan3-name": "1 Ano", "plan3-period": "por ano",
+      "plan3-tag": "Poupança Crescente", "plan3-name": "6 Meses", "plan3-period": "por semestre",
+      "plan4-tag": "Melhor Valor", "plan4-name": "1 Ano", "plan4-period": "por ano",
       "plan-cta": "Começar Agora",
-      "pricing-note": "Todos os planos incluem acesso total ao ginásio.",
+      "extra0-name": "Passe de Dia", "extra1-name": "Cacifo (mensal)", "extra2-name": "Toalha",
+      "extra-per-visit": "/ visita", "extra-per-month": "/ mês",
+      "pricing-cash": "não aceitamos cartões nem MBWay.",
+      "pricing-cash-bold": "Pagamento apenas em dinheiro —",
+      "pricing-note": "Todos os planos mensais incluem seguro anual de €15 (cobrado proporcionalmente).",
       "about-label": "A Nossa História",
       "about-title": "Sobre Nós",
       "about-quote": "\"Be healthy with us.\"",
@@ -1019,9 +1069,14 @@
       "plan0-tag": "Single Entry", "plan0-name": "Day Pass", "plan0-period": "per visit",
       "plan1-tag": "Full Flexibility", "plan1-name": "1 Month", "plan1-period": "per month", "plan1-note": "€37 from the 1st (inclusive)",
       "plan2-tag": "Most Popular", "plan2-name": "3 Months", "plan2-period": "per quarter",
-      "plan3-tag": "Best Value", "plan3-name": "1 Year", "plan3-period": "per year",
+      "plan3-tag": "Growing Savings", "plan3-name": "6 Months", "plan3-period": "per 6 months",
+      "plan4-tag": "Best Value", "plan4-name": "1 Year", "plan4-period": "per year",
       "plan-cta": "Get Started",
-      "pricing-note": "All memberships include full gym access.",
+      "extra0-name": "Day Pass", "extra1-name": "Monthly Locker", "extra2-name": "Towel",
+      "extra-per-visit": "/ visit", "extra-per-month": "/ month",
+      "pricing-cash": "we do not accept cards or MBWay.",
+      "pricing-cash-bold": "Cash payments only —",
+      "pricing-note": "All monthly memberships include annual insurance of €15 (charged proportionally).",
       "about-label": "Our Story",
       "about-title": "About Us",
       "about-quote": "\"Be healthy with us.\"",
